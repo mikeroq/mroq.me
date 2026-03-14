@@ -71,7 +71,7 @@
       <div class="absolute inset-0 bg-grid bg-[size:26px_26px] [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
 
       <main class="relative mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-6 sm:px-6 lg:px-8">
-        <header class="rounded-[2rem] border border-white/10 bg-white/70 p-5 shadow-glow backdrop-blur-xl dark:bg-white/5 sm:p-6">
+        <header class="relative rounded-[2rem] border border-white/10 bg-white/70 p-5 shadow-glow backdrop-blur-xl dark:bg-white/5 sm:p-6">
           <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div class="max-w-4xl space-y-5">
               <div class="inline-flex w-fit items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.28em] text-sky-700 dark:text-sky-200">
@@ -99,10 +99,14 @@
                   United States
                 </span>
                 <a
+                  id="email-link"
                   class="rounded-full border border-slate-300/70 bg-white/75 px-3 py-1.5 hover:border-sky-400 hover:text-sky-600 dark:border-white/10 dark:bg-white/5 dark:hover:text-sky-300"
-                  href="mailto:me@mikeroq.xyz"
+                  href="#contact"
+                  data-user="me"
+                  data-domain="mikeroq.xyz"
+                  aria-label="Email Mike Roquemore"
                 >
-                  me@mikeroq.xyz
+                  Reveal email
                 </a>
               </div>
             </div>
@@ -111,13 +115,12 @@
               <button
                 id="theme-toggle"
                 type="button"
-                class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300/70 bg-white/80 text-slate-700 shadow-sm hover:-translate-y-0.5 hover:border-sky-400 hover:text-sky-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:text-sky-300"
+                class="absolute right-5 top-5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-300/70 bg-white/80 text-slate-700 shadow-sm hover:-translate-y-0.5 hover:border-sky-400 hover:text-sky-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:text-sky-300 sm:right-6 sm:top-6 lg:static"
                 aria-label="Toggle color theme"
                 title="Toggle color theme"
               >
                 <span id="theme-icon" aria-hidden="true"></span>
               </button>
-
               <div class="grid w-full gap-3 sm:min-w-[18rem]">
                 <a
                   href="https://www.linkedin.com/in/mikeroq/"
@@ -352,6 +355,15 @@
         toggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
         toggle.setAttribute("title", dark ? "Switch to light mode" : "Switch to dark mode");
         root.style.colorScheme = dark ? "dark" : "light";
+      }
+
+      const emailLink = document.getElementById("email-link");
+      if (emailLink) {
+        const user = emailLink.dataset.user;
+        const domain = emailLink.dataset.domain;
+        const address = `${user}@${domain}`;
+        emailLink.href = `mailto:${address}`;
+        emailLink.textContent = address;
       }
 
       toggle.addEventListener("click", () => {

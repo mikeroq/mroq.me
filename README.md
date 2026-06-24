@@ -1,21 +1,35 @@
-# React + TypeScript + Vite + shadcn/ui
+# mroq.me
 
-This is a template for a new Vite project with React, TypeScript, and shadcn/ui.
+Personal site for Mike Roquemore, IT Generalist.
 
-## Adding components
+## Stack
 
-To add components to your app, run the following command:
+Vite + React + TypeScript + Tailwind v4 + [shadcn/ui](https://ui.shadcn.com).
+Themed with the [tweakcn](https://tweakcn.com) preset `b3DpibPrn9`
+(lyra style, neutral base, Inter + JetBrains Mono).
+
+## Scripts
 
 ```bash
-npx shadcn@latest add button
+npm install        # install deps
+npm run dev        # local dev server
+npm run build      # production build -> dist/
+npm run preview    # serve the built dist/
+npm run lint       # eslint
+npm run typecheck  # tsc --noEmit
 ```
 
-This will place the ui components in the `src/components` directory.
+## Deployment
 
-## Using components
+GitHub Pages is configured via `.github/workflows/deploy.yml`.
+The workflow runs `npm ci && npm run build` on pushes to `main`
+and publishes `dist/` using `actions/deploy-pages`.
 
-To use the components in your app, import them as follows:
+In the repo's **Settings → Pages**, set the source to **GitHub Actions**
+so the workflow can take over publishing.
 
-```tsx
-import { Button } from "@/components/ui/button"
+## Adding shadcn components
+
+```bash
+npx shadcn@latest add <component-name>
 ```
